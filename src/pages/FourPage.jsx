@@ -10,23 +10,13 @@ export default function PageFour() {
     (user.maritalStatus === "single" || user.spouseName);
 
   return (
-    <div>
-      <h2>Personal Info</h2>
-      <p>I am {user.gender} of {user.age} years old.</p>
-
-      <select value={user.maritalStatus}
-        onChange={e => dispatch(setData({ maritalStatus: e.target.value }))}>
-        <option value="">Marital Status</option>
-        <option value="single">Single</option>
-        <option value="married">Married</option>
-      </select>
-
-      {user.maritalStatus === "married" && (
-        <input placeholder="Wife Name" value={user.spouseName}
-          onChange={e => dispatch(setData({ spouseName: e.target.value }))} />
-      )}
-
-      <button disabled={!isValid} onClick={() => dispatch(nextStep())}>Next</button>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: "80vh", padding: "0 60px", position: "relative" }}>
+      <div style={{ flex: 1, textAlign: "left" }}>
+        <h1 style={{ fontSize: "60px", fontWeight: "bold", margin: "0", color: "#000" }}>Life Insurance</h1>
+        <h2 style={{ fontSize: "60px", fontWeight: "bold", margin: "10px 0 30px 0", color: "#000" }}>Made Simple</h2>
+        <p style={{ fontSize: "16px", color: "#666", margin: "20px 0 30px 0", maxWidth: "500px", lineHeight: "1.5" }}>Find your goals and plan your future</p>
+        <button onClick={() => dispatch(nextStep())} disabled={!isValid} style={{ padding: "12px 25px", fontSize: "16px", fontWeight: "bold", background: "#FF6633", color: "#fff", border: "none", borderRadius: "25px", cursor: "pointer", marginTop: "10px", opacity: isValid ? 1 : 0.6 }}>Get Started →</button>
+      </div>
     </div>
   );
 }

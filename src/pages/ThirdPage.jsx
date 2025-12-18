@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setData, nextStep } from "../States/UserSlice";
+import { Box, TextField, Select, MenuItem, Button } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function PageThree() {
   const dispatch = useDispatch();
@@ -18,19 +21,87 @@ export default function PageThree() {
   };
 
   return (
-    <div>
-      <h2>Enter Details</h2>
+    <Box style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", minHeight: "80vh", padding: "40px" }}>
+      {/* Header */}
+      <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginBottom: "40px" }}>
+        <Button startIcon={<ArrowBackIcon />} style={{ textTransform: "none", color: "#000" }}>
+          Back
+        </Button>
+        <h2 style={{ margin: 0, fontSize: "24px", fontWeight: "bold" }}>My details</h2>
+        <Box style={{ fontSize: "14px", color: "#666" }}>3/5</Box>
+      </Box>
 
-      <input placeholder="First Name" value={user.firstName}
-        onChange={e => dispatch(setData({ firstName: e.target.value }))} />
+      {/* Title */}
+      <h1 style={{ fontSize: "48px", fontWeight: "bold", textAlign: "center", maxWidth: "600px", marginBottom: "50px", lineHeight: "1.2" }}>
+        Let's get started by telling a little bit about yourself
+      </h1>
 
-      <input placeholder="Last Name" value={user.lastName}
-        onChange={e => dispatch(setData({ lastName: e.target.value }))} />
+      {/* Form */}
+      <Box style={{ width: "100%", maxWidth: "500px", display: "flex", flexDirection: "column", gap: "20px" }}>
+        {/* First Name with Title Dropdown */}
+        <Box>
+          <label style={{ fontSize: "12px", color: "#666", display: "block", marginBottom: "8px" }}>First Name</label>
+          <Box style={{ display: "flex", gap: "10px" }}>
+            <Select value="Mr" style={{ width: "100px", height: "44px" }}>
+              <MenuItem value="Mr">Mr.</MenuItem>
+              <MenuItem value="Ms">Ms.</MenuItem>
+            </Select>
+            <TextField
+              fullWidth
+              placeholder="Arjuna"
+              value={user.firstName}
+              onChange={e => dispatch(setData({ firstName: e.target.value }))}
+              InputProps={{ startAdornment: <PersonIcon style={{ marginRight: "10px", color: "#999" }} /> }}
+              style={{ height: "44px" }}
+            />
+          </Box>
+        </Box>
 
-      <input type="date" value={user.dob}
-        onChange={e => dispatch(setData({ dob: e.target.value }))} />
+        {/* Last Name */}
+        <Box>
+          <label style={{ fontSize: "12px", color: "#666", display: "block", marginBottom: "8px" }}>Last name</label>
+          <TextField
+            fullWidth
+            placeholder="Indrajith"
+            value={user.lastName}
+            onChange={e => dispatch(setData({ lastName: e.target.value }))}
+            InputProps={{ startAdornment: <PersonIcon style={{ marginRight: "10px", color: "#999" }} /> }}
+            style={{ height: "44px" }}
+          />
+        </Box>
 
-      <button disabled={!isValid} onClick={handleNext}>Next</button>
-    </div>
+        {/* Date of Birth */}
+        <Box>
+          <label style={{ fontSize: "12px", color: "#666", display: "block", marginBottom: "8px" }}>My date of birth</label>
+          <TextField
+            fullWidth
+            type="date"
+            value={user.dob}
+            onChange={e => dispatch(setData({ dob: e.target.value }))}
+            InputProps={{ startAdornment: <PersonIcon style={{ marginRight: "10px", color: "#999" }} /> }}
+            style={{ height: "44px" }}
+          />
+        </Box>
+      </Box>
+
+      {/* Next Button */}
+      <Button
+        disabled={!isValid}
+        onClick={handleNext}
+        style={{
+          marginTop: "50px",
+          padding: "12px 30px",
+          fontSize: "16px",
+          fontWeight: "bold",
+          background: "#FF6633",
+          color: "#fff",
+          textTransform: "none",
+          borderRadius: "25px",
+          opacity: isValid ? 1 : 0.6
+        }}
+      >
+        Next →
+      </Button>
+    </Box>
   );
 }

@@ -20,7 +20,7 @@ export default function App() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <AppNavbar />
-      <main style={{ flex: 1, padding: 30, overflow: "auto" }}>{PageComponent}</main>
+      <main style={{ flex: 1, padding: 30, overflow: "hidden" }}>{PageComponent}</main>
       <Footer />
     </div>
   );
