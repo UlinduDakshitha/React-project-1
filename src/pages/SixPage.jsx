@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setData, nextStep } from "../States/UserSlice";
+import { useNavigate } from "react-router-dom";
+import { setData } from "../States/UserSlice";
 import { Box, Button, Card, CardContent, Typography, Chip } from "@mui/material";
 import MyDetailsHeader from "../components/MyDetailsHeader";
 import AddIcon from "@mui/icons-material/Add";
@@ -52,10 +53,9 @@ const GOALS = [
 
 export default function SixPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector(s => s.user);
   const [selectedGoals, setSelectedGoals] = useState([]);
-
-  if (user.step !== 6) return null;
 
   const toggleGoal = (goalId) => {
     setSelectedGoals(prev =>
@@ -67,20 +67,17 @@ export default function SixPage() {
 
   const handleNext = () => {
     dispatch(setData({ goals: selectedGoals }));
-    dispatch(nextStep());
+    navigate("/page6"); // or wherever the next page should be
   };
 
   return (
-    <Box style={{ display: "flex", flexDirection: "column", minHeight: "80vh" }}>
-      <MyDetailsHeader step="6/6" />
-
-      <Box style={{ display: "flex", flexDirection: "column", flex: 1, padding: "40px", overflowY: "auto" }}>
-        {/* Title */}
+    <Box style={{ display: "flex", flexDirection: "column" }}>
+        
         <h1 style={{ fontSize: "36px", fontWeight: "bold", margin: "20px 0 30px 0" }}>
           What are your main goals in life?
         </h1>
 
-        {/* Tabs and Add Goal Button */}
+        
         <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "30px" }}>
           <Box style={{ display: "flex", gap: "15px" }}>
             <Chip label="All goals" variant="filled" style={{ background: "#f0f0f0", cursor: "pointer" }} />
@@ -103,7 +100,7 @@ export default function SixPage() {
           </Button>
         </Box>
 
-        {/* Goals Grid */}
+        
         <Box style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "20px", marginBottom: "40px" }}>
           {GOALS.map(goal => (
             <Card
@@ -165,7 +162,7 @@ export default function SixPage() {
                 </Typography>
               </CardContent>
 
-              {/* Checkmark for selected goals */}
+              
               {selectedGoals.includes(goal.id) && (
                 <Box
                   style={{
@@ -192,7 +189,7 @@ export default function SixPage() {
           ))}
         </Box>
 
-        {/* Next Button */}
+        
         <Box style={{ display: "flex", justifyContent: "flex-end", paddingBottom: "20px" }}>
           <Button
             onClick={handleNext}
@@ -210,6 +207,5 @@ export default function SixPage() {
           </Button>
         </Box>
       </Box>
-    </Box>
   );
 }

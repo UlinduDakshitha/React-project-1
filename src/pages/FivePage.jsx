@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { nextStep } from "../States/UserSlice";
+import { useNavigate } from "react-router-dom";
 import { Box, Button, TextField, Slider } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ChildCareIcon from "@mui/icons-material/ChildCare";
@@ -8,14 +8,13 @@ import MyDetailsHeader from "../components/MyDetailsHeader";
 
 export default function PageFive() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const u = useSelector(s => s.user);
   const [numKids, setNumKids] = useState(2);
   const [kids, setKids] = useState([
-    { name: "Ruwan", age: 5 },
-    { name: "Ruwani", age: 2 }
+    { name: "", age: 5 },
+    { name: "", age: 2 }
   ]);
-
-  if (u.step !== 5) return null;
 
   const handleKidsChange = (value) => {
     setNumKids(value);
@@ -37,18 +36,7 @@ export default function PageFive() {
   };
 
   return (
-    <Box style={{ display: "flex", flexDirection: "column", minHeight: "80vh" }}>
-      <MyDetailsHeader step="5/5" />
-      
-      <Box style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flex: 1, padding: "40px" }}>
-      {/* Header */}
-      <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginBottom: "40px" }}>
-        <Button startIcon={<ArrowBackIcon />} style={{ textTransform: "none", color: "#000" }}>
-          Back
-        </Button>
-        <h2 style={{ margin: 0, fontSize: "24px", fontWeight: "bold" }}>My details</h2>
-        <Box style={{ fontSize: "14px", color: "#666" }}>5/5</Box>
-      </Box>
+    <Box style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Box style={{ textAlign: "center", marginBottom: "40px" }}>
         <p style={{ fontSize: "18px", margin: "10px 0" }}>
           My name is <span style={{ color: "#FF6633", fontWeight: "bold" }}>{u.firstName}</span>
@@ -65,12 +53,12 @@ export default function PageFive() {
         )}
       </Box>
 
-      {/* Title */}
+      
       <h1 style={{ fontSize: "36px", fontWeight: "bold", textAlign: "center", marginBottom: "30px" }}>
         I have (kids)
       </h1>
 
-      {/* Slider */}
+      
       <Box style={{ width: "100%", maxWidth: "400px", marginBottom: "20px" }}>
         <Slider
           value={numKids}
@@ -84,10 +72,10 @@ export default function PageFive() {
         />
       </Box>
 
-      {/* They are */}
+      
       <p style={{ fontSize: "16px", color: "#666", marginBottom: "20px" }}>they are</p>
 
-      {/* Kids List */}
+      
       <Box style={{ width: "100%", maxWidth: "500px", display: "flex", flexDirection: "column", gap: "20px", marginBottom: "30px" }}>
         {kids.map((kid, index) => (
           <Box key={index} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
@@ -118,9 +106,9 @@ export default function PageFive() {
         ))}
       </Box>
 
-      {/* Next Button */}
+      
       <Button
-        onClick={() => dispatch(nextStep())}
+        onClick={() => navigate("/page6")}
         style={{
           marginTop: "20px",
           padding: "12px 30px",
@@ -134,7 +122,6 @@ export default function PageFive() {
       >
         Next →
       </Button>
-      </Box>
     </Box>
   );
 }

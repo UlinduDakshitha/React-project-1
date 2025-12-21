@@ -1,29 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setData, nextStep } from "../States/UserSlice";
+import { useNavigate } from "react-router-dom";
+import { setData } from "../States/UserSlice";
 import { Box, Button, TextField } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PersonIcon from "@mui/icons-material/Person";
 
 export default function PageFour() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector(s => s.user);
-  if (user.step !== 4) return null;
 
   const isValid = user.maritalStatus &&
     (user.maritalStatus === "single" || user.spouseName);
 
   return (
-    <Box style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", minHeight: "80vh", padding: "40px" }}>
-      
-      <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginBottom: "40px" }}>
-        <Button startIcon={<ArrowBackIcon />} style={{ textTransform: "none", color: "#000" }}>
-          Back
-        </Button>
-        <h2 style={{ margin: 0, fontSize: "24px", fontWeight: "bold" }}>My details</h2>
-        <Box style={{ fontSize: "14px", color: "#666" }}>4/5</Box>
-      </Box>
-
-      
+    <Box style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Box style={{ textAlign: "center", marginBottom: "50px" }}>
         <p style={{ fontSize: "18px", margin: "10px 0" }}>
           My name is <span style={{ color: "#FF6633", fontWeight: "bold" }}>{user.firstName}</span>
@@ -86,7 +77,7 @@ export default function PageFour() {
             <label style={{ fontSize: "12px", color: "#666", display: "block", marginBottom: "8px" }}>My wife is</label>
             <TextField
               fullWidth
-              placeholder="Dilu"
+              placeholder=""
               value={user.spouseName}
               onChange={e => dispatch(setData({ spouseName: e.target.value }))}
               InputProps={{ startAdornment: <PersonIcon style={{ marginRight: "10px", color: "#999" }} /> }}
@@ -99,7 +90,7 @@ export default function PageFour() {
       
       <Button
         disabled={!isValid}
-        onClick={() => dispatch(nextStep())}
+        onClick={() => navigate("/page5")}
         style={{
           marginTop: "50px",
           padding: "12px 30px",

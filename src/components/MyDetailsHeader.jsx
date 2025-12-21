@@ -13,12 +13,12 @@ export default function MyDetailsHeader({ step }) {
       }}
     >
       <Toolbar sx={{ px: 1 }}>
-        {/* Back Arrow */}
+       
         <IconButton edge="start">
           <ArrowBackIcon />
         </IconButton>
 
-        {/* Title */}
+         
         <Typography
           sx={{
             flexGrow: 1,
@@ -29,8 +29,7 @@ export default function MyDetailsHeader({ step }) {
         >
           My details
         </Typography>
-
-        {/* Right Icon with Step */}
+ 
         <IconButton edge="end">
           <TuneIcon />
         </IconButton>
